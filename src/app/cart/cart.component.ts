@@ -19,9 +19,30 @@ export class CartComponent {
 
   constructor(private cart: CartService, private form: FormBuilder) {}
 
+  ngOnInit() {
+    console.log('From ngOnInit of Cart component');
+    this.logNameChange();
+  }
+
+  ngAfterViewInit() {
+    console.log('From ngAfterViewInit of Cart component');
+  }
+
+  ngOnDestroy() {
+    window.alert('hi, save me please');
+    console.log('ngOnDestroy of Cart component');
+  }
+
   onSubmit(): void {
     this.items = this.cart.clearCart();
     console.warn('Your order has been sumbitted', this.checkoutForm.value);
     this.checkoutForm.reset();
+  }
+
+  logNameChange() {
+    const nameControl = this.checkoutForm.get('name');
+    nameControl?.valueChanges.forEach((value: string | null) =>
+      console.log(value)
+    );
   }
 }

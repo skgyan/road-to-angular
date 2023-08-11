@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { Observable } from 'rxjs';
 import { products } from '../products';
 
 @Component({
@@ -9,6 +9,9 @@ import { products } from '../products';
 })
 export class ProductListComponent {
   products = [...products];
+  time = new Observable<string>((observer) => {
+    setInterval(() => observer.next(new Date().toString()), 1000);
+  });
 
   share() {
     window.alert('The product has been shared!');
@@ -17,6 +20,8 @@ export class ProductListComponent {
   onNotify() {
     window.alert("Notification: You'll be notified when product goes on sale");
   }
+
+  ngOnInti() {}
 }
 
 /*
